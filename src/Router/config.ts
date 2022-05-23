@@ -1,9 +1,9 @@
 const HOMEPAGE = '/'
-const PIZZAPAGE = 'pizza/:number'
+const PIZZAINFOPAGE = 'pizza/:number'
 const CART = 'cart'
 
 export const Path = {
 	HOMEPAGE,
-	PIZZAPAGE,
+	PIZZAINFOPAGE,
 	CART,
 }
