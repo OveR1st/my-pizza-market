@@ -1,0 +1,18 @@
+.sort {
+	display: flex;
+	align-items: center;
+
+	svg {
+		margin-right: 8px;
+	}
+
+	b {
+		margin-right: 8px;
+	}
+
+	span {
+		border-bottom: 1px dashed #fe5f1e;
+		color: #fe5f1e;
+		cursor: pointer;
+	}
+}

@@ -1,0 +1,18 @@
+.container {
+	width: 90%;
+	margin: 0 auto;
+	padding: 40px 0;
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.title {
+		font-size: 38px;
+		font-weight: 800;
+		margin-bottom: 50px;
+		margin-top: 60px;
+	}
+}
