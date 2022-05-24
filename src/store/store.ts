@@ -1,14 +1,16 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
+import { pizzaApi } from '../services/api'
 import pizzaReducer from './reducers/pizzaSlice.reducer'
 
 const rootReducer = combineReducers({
 	pizzaReducer,
+	[pizzaApi.reducerPath]: pizzaApi.reducer,
 })
 
 export const setupStore = () => {
 	return configureStore({
 		reducer: rootReducer,
-		middleware: getDefaultMiddleware => getDefaultMiddleware(),
+		middleware: getDefaultMiddleware => getDefaultMiddleware().concat(pizzaApi.middleware),
 	})
 }
 
