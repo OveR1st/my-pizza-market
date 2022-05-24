@@ -1,0 +1,131 @@
+.pizzaItem {
+	width: 18rem;
+
+	a {
+		text-decoration: none;
+	}
+
+	img {
+		width: 100%;
+	}
+
+	h4 {
+		font-size: 20px;
+		font-weight: 900;
+		margin-bottom: 20px;
+
+		text-align: center;
+		color: #232323;
+	}
+
+	&__selector {
+		background-color: #f3f3f3;
+		border-radius: 10px;
+		display: flex;
+		flex-direction: column;
+		padding: 6px;
+
+		ul {
+			display: flex;
+
+			li {
+				-webkit-touch-callout: none;
+				cursor: pointer;
+				flex: 1 1;
+				font-size: 14px;
+				font-weight: 600;
+				padding: 8px;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.active {
+				background: #fff;
+				border-radius: 5px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+				cursor: auto;
+			}
+		}
+
+		ul:first-of-type {
+			margin-bottom: 6px;
+		}
+	}
+
+	&__priceBox {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
+
+		.price {
+			font-size: 22px;
+			font-weight: 700;
+			letter-spacing: 0.015em;
+			line-height: 27px;
+		}
+
+		.addBtn {
+			-webkit-touch-callout: none;
+			border: 1px solid transparent;
+			border-radius: 30px;
+			cursor: pointer;
+			display: inline-block;
+			min-width: 100px;
+			padding: 10px 20px;
+			text-align: center;
+			transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+
+			background-color: #fff;
+			border-color: #fe5f1e;
+
+			span {
+				color: #fe5f1e;
+			}
+
+			svg {
+				margin-right: 2px;
+				path {
+					fill: #fe5f1e;
+				}
+			}
+
+			i {
+				background-color: #fe5f1e;
+				border-radius: 30px;
+				color: #fff;
+				display: inline-block;
+				font-size: 13px;
+				font-style: normal;
+				font-weight: 600;
+				height: 22px;
+				left: 3px;
+				line-height: 22px;
+				position: relative;
+				top: -1px;
+				width: 22px;
+			}
+
+			&:hover {
+				background-color: #fe5f1e;
+
+				span {
+					color: white;
+				}
+
+				svg path {
+					fill: white;
+				}
+
+				i {
+					background-color: white;
+					color: #fe5f1e;
+				}
+			}
+		}
+	}
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Categories from '../../components/Categories'
+import PizzaList from '../../components/PizzaList'
 import Sort from '../../components/Sort'
 
 import s from './styles.module.scss'
@@ -13,6 +14,7 @@ const HomePage: React.FC = () => {
 				<Sort />
 			</div>
 			<h2 className={s.title}>Все пиццы</h2>
+			<PizzaList />
 		</div>
 	)
 }

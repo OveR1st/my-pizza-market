@@ -1,0 +1,10 @@
+.pizzaWrapper {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+
+	// grid-column-gap: 11px;
+	// display: grid;
+	// grid-template-columns: repeat(4,1fr);
+	// grid-template-rows: repeat(1,1fr);
+}
