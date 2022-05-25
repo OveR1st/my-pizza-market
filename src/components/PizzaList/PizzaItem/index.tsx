@@ -11,13 +11,13 @@ interface IProps {
 	pizzaPrice: number
 	pizzaTitle: string
 	isLoading: boolean
+	id: string
 }
 
-const PizzaItem: React.FC<IProps> = ({ pizzaImg, pizzaPrice, pizzaTitle, isLoading }) => {
+const PizzaItem: React.FC<IProps> = ({ id, pizzaImg, pizzaPrice, pizzaTitle, isLoading }) => {
 	return (
 		<div className={s.pizzaItem}>
-			{/* TODO add dynamic route pizza page */}
-			<Link to="/pizza/7">
+			<Link to={`/pizza/${id}`}>
 				{isLoading ? <Skeleton circle height="59%" /> : <img src={pizzaImg} alt="Pizza" />}
 				<h4>{isLoading ? <Skeleton /> : pizzaTitle}</h4>
 			</Link>

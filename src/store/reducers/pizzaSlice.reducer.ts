@@ -1,25 +1,21 @@
-// import { IRepoInfo } from './../../models/IRepo';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-// import { fetchRepo } from "./ActionCreators";
+import { RootState } from './../store'
+import { IPizza } from './../../models/IPizza'
+import { createSlice } from '@reduxjs/toolkit'
 
-interface IReposState {
-	pizza: []
-	isLoading: boolean
-	error: string
+export interface IReposState {
+	pizza: IPizza[]
 }
 
 const initialState: IReposState = {
 	pizza: [],
-	isLoading: false,
-	error: '',
 }
 
 export const pizzaSlice = createSlice({
 	name: 'Pizza',
 	initialState,
 	reducers: {
-		clearError(state) {
-			state.error = ''
+		clearError(state, { payload }) {
+			state.pizza = payload
 		},
 	},
 	extraReducers: {
@@ -45,5 +41,10 @@ export const pizzaSlice = createSlice({
 		// }
 	},
 })
+// const pizzaSelector = (state: IReposState): IPizza[] => state.pizza
+
+export const pizzaDataSelector = (state: RootState, number: string): IPizza | undefined => {
+	return state.pizzaReducer.pizza.find(pizza => pizza.id === number)
+}
 
 export default pizzaSlice.reducer

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Pizza } from '../../services/api'
+import { IPizza } from '../../models/IPizza'
 import PizzaItem from './PizzaItem'
 
 import s from './styles.module.scss'
 
 interface IProps {
-	pizzaData: Pizza[] | undefined
+	pizzaData: IPizza[] | undefined
 	isLoading: boolean
 }
 
@@ -24,6 +24,7 @@ const PizzaList: React.FC<IProps> = ({ pizzaData, isLoading }) => {
 				return (
 					<PizzaItem
 						key={pizza.id}
+						id={pizza.id}
 						pizzaImg={pizza.imageUrl}
 						pizzaPrice={pizza.price}
 						pizzaTitle={pizza.title}
