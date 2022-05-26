@@ -1,16 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { pizzaSlice } from '../store/reducers/pizzaSlice.reducer'
 import { IPizza } from '../models/IPizza'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface Page {
 	page: number | undefined
 	limit: number | undefined
 }
 
+const baseURL = 'https://626d16545267c14d5677d9c2.mockapi.io'
+
 // Define a service using a base URL and expected endpoints
 export const pizzaApi = createApi({
 	reducerPath: 'pizzaApi',
-	baseQuery: fetchBaseQuery({ baseUrl: 'https://626d16545267c14d5677d9c2.mockapi.io' }),
+	baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
 
 	endpoints: builder => ({
 		getPizzaPage: builder.query<IPizza[], Page>({
@@ -21,7 +24,7 @@ export const pizzaApi = createApi({
 				try {
 					const { data } = await queryFulfilled
 					// `onSuccess` side-effect
-					dispatch(pizzaSlice.actions.clearError(data))
+					dispatch(pizzaSlice.actions.setPizzaPage(data))
 				} catch (err) {
 					// `onError` side-effect
 					// dispatch(messageCreated('Error fetching post!'))

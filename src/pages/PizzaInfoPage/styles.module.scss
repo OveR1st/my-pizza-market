@@ -1,0 +1,86 @@
+.wrapper {
+	.InfoPageContainer {
+		padding-top: 40px;
+		padding-bottom: 40px;
+
+		margin: 0 auto;
+		max-width: 90%;
+
+		.imgContainer {
+			width: 35%;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		.price {
+			font-size: 20px;
+			font-weight: 700;
+			color: #262626;
+			margin-bottom: 20px;
+		}
+
+		.backBtn {
+			-webkit-touch-callout: none;
+			border: 1px solid transparent;
+			border-radius: 30px;
+			cursor: pointer;
+			display: inline-block;
+			min-width: 100px;
+			padding: 10px 20px;
+			text-align: center;
+			transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+
+			background-color: #fff;
+			border-color: #fe5f1e;
+
+			span {
+				color: #fe5f1e;
+			}
+
+			svg {
+				margin-right: 2px;
+				path {
+					fill: #fe5f1e;
+				}
+			}
+
+			i {
+				background-color: #fe5f1e;
+				border-radius: 30px;
+				color: #fff;
+				display: inline-block;
+				font-size: 13px;
+				font-style: normal;
+				font-weight: 600;
+				height: 22px;
+				left: 3px;
+				line-height: 22px;
+				position: relative;
+				top: -1px;
+				width: 22px;
+			}
+
+			&:hover {
+				background-color: #fe5f1e;
+
+				span {
+					color: white;
+				}
+
+				svg path {
+					fill: white;
+				}
+
+				i {
+					background-color: white;
+					color: #fe5f1e;
+				}
+			}
+		}
+	}
+}

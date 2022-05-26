@@ -1,50 +1,48 @@
 import { RootState } from './../store'
 import { IPizza } from './../../models/IPizza'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { fetchPizzaInfo } from '../actionCreator'
 
 export interface IReposState {
-	pizza: IPizza[]
+	pizzaPage: IPizza[]
+	pizza: IPizza | {}
+	isLoading: boolean
+	error: string
 }
 
 const initialState: IReposState = {
-	pizza: [],
+	pizzaPage: [],
+	pizza: {},
+	isLoading: false,
+	error: '',
 }
 
 export const pizzaSlice = createSlice({
 	name: 'Pizza',
 	initialState,
 	reducers: {
-		clearError(state, { payload }) {
-			state.pizza = payload
+		setPizzaPage(state, { payload }) {
+			state.pizzaPage = payload
 		},
 	},
 	extraReducers: {
-		// [fetchRepo.pending.type]: (state) => {
-		//     state.isLoading = true
-		// },
-		// [fetchRepo.fulfilled.type]: (state, { payload }: PayloadAction<IRepoInfo>) => {
-		//     if(state.repos.find((repo) => repo.name === payload.name)) {
-		//         state.isLoading = false
-		//         state.error = 'repo exists'
-		//         return
-		//     }
-		//     state.isLoading = false
-		//     state.error = ''
-		//     state.repos = [
-		//         ...state.repos,
-		//         payload
-		//     ]
-		// },
-		// [fetchRepo.rejected.type]: (state, { payload }: PayloadAction<string>) => {
-		//     state.isLoading = false
-		//     state.error = 'Search error'
-		// }
+		[fetchPizzaInfo.pending.type]: state => {
+			state.isLoading = true
+		},
+		[fetchPizzaInfo.fulfilled.type]: (state, { payload }: PayloadAction<IPizza>) => {
+			console.log('payload fulfilled', payload)
+			state.pizza = payload
+		},
+		[fetchPizzaInfo.rejected.type]: (state, { payload }: PayloadAction<string>) => {
+			state.isLoading = false
+			state.error = 'Search error'
+		},
 	},
 })
 // const pizzaSelector = (state: IReposState): IPizza[] => state.pizza
 
 export const pizzaDataSelector = (state: RootState, number: string): IPizza | undefined => {
-	return state.pizzaReducer.pizza.find(pizza => pizza.id === number)
+	return state.pizzaReducer.pizzaPage.find(pizza => pizza.id === number)
 }
 
 export default pizzaSlice.reducer
