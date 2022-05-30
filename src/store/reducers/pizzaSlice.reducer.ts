@@ -5,14 +5,14 @@ import { fetchPizzaInfo } from '../actionCreator'
 
 export interface IReposState {
 	pizzaPage: IPizza[]
-	pizza: IPizza | {}
+	pizzaQuery: IPizza | null
 	isLoading: boolean
 	error: string
 }
 
 const initialState: IReposState = {
 	pizzaPage: [],
-	pizza: {},
+	pizzaQuery: null,
 	isLoading: false,
 	error: '',
 }
@@ -30,8 +30,8 @@ export const pizzaSlice = createSlice({
 			state.isLoading = true
 		},
 		[fetchPizzaInfo.fulfilled.type]: (state, { payload }: PayloadAction<IPizza>) => {
-			console.log('payload fulfilled', payload)
-			state.pizza = payload
+			state.pizzaQuery = payload
+			state.isLoading = false
 		},
 		[fetchPizzaInfo.rejected.type]: (state, { payload }: PayloadAction<string>) => {
 			state.isLoading = false
