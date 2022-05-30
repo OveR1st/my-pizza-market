@@ -1,6 +1,12 @@
 .pizzaItem {
 	width: 18rem;
 	min-height: 30.8125rem;
+	transition: transform 0.3s ease;
+
+	&:hover {
+		-webkit-transform: scale(1.03);
+		transform: scale(1.03);
+	}
 
 	a {
 		text-decoration: none;
@@ -30,6 +36,7 @@
 			display: flex;
 
 			li {
+				text-align: center;
 				-webkit-touch-callout: none;
 				cursor: pointer;
 				flex: 1 1;

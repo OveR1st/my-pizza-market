@@ -5,21 +5,27 @@ import s from './styles.module.scss'
 
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import clsx from 'clsx'
 
 interface IProps {
-	pizzaImg: string
-	pizzaPrice: number
-	pizzaTitle: string
+	imageUrl: string
+	price: number
+	title: string
 	isLoading: boolean
 	id: string
+	sizes: number[]
+	types: number[]
 }
 
-const PizzaItem: React.FC<IProps> = ({ id, pizzaImg, pizzaPrice, pizzaTitle, isLoading }) => {
+const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, sizes, types }) => {
+	const [pizzaType, setPizzaType] = React.useState(0)
+	const [pizzaSize, setPizzaSize] = React.useState(0)
+	const typeName = ['тонкое', 'традиционное']
 	return (
 		<div className={s.pizzaItem}>
 			<Link to={`/pizza/${id}`}>
-				{isLoading ? <Skeleton circle height="59%" /> : <img src={pizzaImg} alt="Pizza" />}
-				<h4>{isLoading ? <Skeleton /> : pizzaTitle}</h4>
+				{isLoading ? <Skeleton circle height="59%" /> : <img src={imageUrl} alt="Pizza" />}
+				<h4>{isLoading ? <Skeleton /> : title}</h4>
 			</Link>
 			<div className={s.pizzaItem__selector}>
 				{isLoading ? (
@@ -27,13 +33,30 @@ const PizzaItem: React.FC<IProps> = ({ id, pizzaImg, pizzaPrice, pizzaTitle, isL
 				) : (
 					<>
 						<ul>
-							<li className={s.active}>тонкое</li>
-							<li className="">традиционное</li>
+							{types.map(typeId => {
+								return (
+									<li
+										key={typeId}
+										onClick={() => setPizzaType(typeId)}
+										className={clsx(pizzaType === typeId && s.active)}
+									>
+										{typeName[typeId]}
+									</li>
+								)
+							})}
 						</ul>
 						<ul>
-							<li className={s.active}>26 см.</li>
-							<li className="">30 см.</li>
-							<li className="">40 см.</li>
+							{sizes.map((num, i) => {
+								return (
+									<li
+										key={i}
+										onClick={() => setPizzaSize(i)}
+										className={clsx(pizzaSize === i && s.active)}
+									>
+										{num} см.
+									</li>
+								)
+							})}
 						</ul>
 					</>
 				)}
@@ -43,7 +66,7 @@ const PizzaItem: React.FC<IProps> = ({ id, pizzaImg, pizzaPrice, pizzaTitle, isL
 					{isLoading ? (
 						<Skeleton height={'1.6875rem'} width={'7.19725rem'} count={1} />
 					) : (
-						`от ${pizzaPrice} грн`
+						`от ${price} грн`
 					)}
 				</div>
 				{isLoading ? (

@@ -21,16 +21,7 @@ const PizzaList: React.FC<IProps> = ({ pizzaData, isLoading }) => {
 	return (
 		<div className={s.pizzaWrapper}>
 			{pizzaData?.map(pizza => {
-				return (
-					<PizzaItem
-						key={pizza.id}
-						id={pizza.id}
-						pizzaImg={pizza.imageUrl}
-						pizzaPrice={pizza.price}
-						pizzaTitle={pizza.title}
-						isLoading={isLazyLoading}
-					/>
-				)
+				return <PizzaItem key={pizza.id} isLoading={isLazyLoading} {...pizza} />
 			})}
 		</div>
 	)
