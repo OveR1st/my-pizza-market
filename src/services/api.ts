@@ -4,8 +4,11 @@ import { IPizza } from '../models/IPizza'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface Page {
-	page: number | undefined
-	limit: number | undefined
+	page: number
+	limit: number
+	category: number
+	sortBy: string
+	sortOrder: string
 }
 
 const baseURL = 'https://626d16545267c14d5677d9c2.mockapi.io'
@@ -14,11 +17,13 @@ const baseURL = 'https://626d16545267c14d5677d9c2.mockapi.io'
 export const pizzaApi = createApi({
 	reducerPath: 'pizzaApi',
 	baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
-
 	endpoints: builder => ({
 		getPizzaPage: builder.query<IPizza[], Page>({
 			//TODO page, limit
-			query: ({ limit, page }) => `items?page=${page}&limit=${limit}&sortBy=rating&order=desc`,
+			query: ({ limit, page, category, sortBy, sortOrder }) =>
+				`items?page=${page}&limit=${limit}${
+					category !== 0 ? `&category=${category}` : ''
+				}&sortBy=${sortBy}&order=${sortOrder}`,
 
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				try {

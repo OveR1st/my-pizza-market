@@ -3,10 +3,20 @@ import React from 'react'
 
 import s from './styles.module.scss'
 
-const Categories: React.FC = () => {
+interface IProps {
+	selectedCategory: (catId: number) => void
+}
+
+const Categories: React.FC<IProps> = ({ selectedCategory }) => {
 	const category = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
 	const [activeCat, setActiveCat] = React.useState(0)
+
+	const selectedCategoryHandler = (cat: string, i: number) => {
+		setActiveCat(i)
+		selectedCategory(i)
+	}
+
 	return (
 		<div className={s.categories}>
 			<ul>
@@ -14,7 +24,7 @@ const Categories: React.FC = () => {
 					return (
 						<li
 							key={i}
-							onClick={() => setActiveCat(i)}
+							onClick={() => selectedCategoryHandler(cat, i)}
 							className={clsx(activeCat === i && s.active)}
 						>
 							{cat}

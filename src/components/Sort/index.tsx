@@ -3,7 +3,12 @@ import React from 'react'
 import { ReactComponent as SortSVG } from '../../assets/sortArrow.svg'
 
 import s from './styles.module.scss'
-const Sort: React.FC = () => {
+
+interface IProps {
+	selectedSort: (sortBy: string, sortOrder: string) => void
+}
+
+const Sort: React.FC<IProps> = ({ selectedSort }) => {
 	const [activeSortParam, setActiveSortParam] = React.useState(0)
 	const [isOpenPopup, setIsOpenPopup] = React.useState(false)
 	const sortParamsArray = [
@@ -16,6 +21,31 @@ const Sort: React.FC = () => {
 	]
 
 	const sortName = sortParamsArray[activeSortParam]
+
+	const selectedParamHandler = (param: string, i: number) => {
+		setActiveSortParam(i)
+		let [paramName, order] = param.split(' ')
+
+		const newStr = order.replace(/[{()}]/g, '').toLowerCase()
+
+		switch (paramName) {
+			case 'популярности':
+				paramName = 'rating'
+				break
+			case 'цене':
+				paramName = 'price'
+				break
+			case 'алфавиту':
+				paramName = 'title'
+				break
+		}
+		// console.log('newStr', newStr)
+		// console.log('paramName', paramName)
+
+		selectedSort(paramName, newStr)
+		setIsOpenPopup(false)
+	}
+
 	return (
 		<div className={s.sort}>
 			<SortSVG />
@@ -27,7 +57,7 @@ const Sort: React.FC = () => {
 						{sortParamsArray.map((param, i) => {
 							return (
 								<li
-									onClick={() => setActiveSortParam(i)}
+									onClick={() => selectedParamHandler(param, i)}
 									className={clsx(activeSortParam === i && s.active)}
 									key={i}
 								>
