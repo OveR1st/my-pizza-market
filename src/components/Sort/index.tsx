@@ -14,11 +14,13 @@ const Sort: React.FC = () => {
 		'алфавиту (DESC)',
 		'алфавиту (ASC)',
 	]
+
+	const sortName = sortParamsArray[activeSortParam]
 	return (
 		<div className={s.sort}>
 			<SortSVG />
 			<b>Сортировка по:</b>
-			<span onClick={() => setIsOpenPopup(!isOpenPopup)}> популярности</span>
+			<span onClick={() => setIsOpenPopup(!isOpenPopup)}> {sortName}</span>
 			{isOpenPopup ? (
 				<div className={s.sort__popup}>
 					<ul>
