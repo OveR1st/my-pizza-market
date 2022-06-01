@@ -33,12 +33,12 @@ const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, si
 				) : (
 					<>
 						<ul>
-							{types.map(typeId => {
+							{types.map((typeId, i) => {
 								return (
 									<li
 										key={typeId}
 										onClick={() => setPizzaType(typeId)}
-										className={clsx(pizzaType === typeId && s.active)}
+										className={clsx(pizzaType === i && s.active)}
 									>
 										{typeName[typeId]}
 									</li>

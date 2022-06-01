@@ -1,8 +1,11 @@
 .App {
+	width: calc(100vw - 100px);
+	height: 100%;
+	max-width: 1400px;
+	min-height: 62.125rem;
+
 	background-color: #fff;
 	border-radius: 10px;
-	height: 100%;
+
 	margin: 50px auto;
-	max-width: 1400px;
-	width: calc(100vw - 100px);
 }

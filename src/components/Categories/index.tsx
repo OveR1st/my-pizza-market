@@ -5,15 +5,13 @@ import s from './styles.module.scss'
 
 interface IProps {
 	selectedCategory: (catId: number) => void
+	activeCategory: number
 }
 
-const Categories: React.FC<IProps> = ({ selectedCategory }) => {
+const Categories: React.FC<IProps> = ({ selectedCategory, activeCategory }) => {
 	const category = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
-	const [activeCat, setActiveCat] = React.useState(0)
-
 	const selectedCategoryHandler = (cat: string, i: number) => {
-		setActiveCat(i)
 		selectedCategory(i)
 	}
 
@@ -25,7 +23,7 @@ const Categories: React.FC<IProps> = ({ selectedCategory }) => {
 						<li
 							key={i}
 							onClick={() => selectedCategoryHandler(cat, i)}
-							className={clsx(activeCat === i && s.active)}
+							className={clsx(activeCategory === i && s.active)}
 						>
 							{cat}
 						</li>

@@ -6,7 +6,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 interface Page {
 	page: number
 	limit: number
-	category: number
+	activeCategory: number
 	sortBy: string
 	sortOrder: string
 }
@@ -19,10 +19,9 @@ export const pizzaApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
 	endpoints: builder => ({
 		getPizzaPage: builder.query<IPizza[], Page>({
-			//TODO page, limit
-			query: ({ limit, page, category, sortBy, sortOrder }) =>
+			query: ({ limit, page, activeCategory, sortBy, sortOrder }) =>
 				`items?page=${page}&limit=${limit}${
-					category !== 0 ? `&category=${category}` : ''
+					activeCategory !== 0 ? `&category=${activeCategory}` : ''
 				}&sortBy=${sortBy}&order=${sortOrder}`,
 
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {

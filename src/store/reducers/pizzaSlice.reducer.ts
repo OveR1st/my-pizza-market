@@ -8,6 +8,11 @@ export interface IReposState {
 	pizzaQuery: IPizza | null
 	isLoading: boolean
 	error: string
+	filtered: {
+		sortBy: string
+		sortOrder: string
+		activeCategory: number
+	}
 }
 
 const initialState: IReposState = {
@@ -15,6 +20,11 @@ const initialState: IReposState = {
 	pizzaQuery: null,
 	isLoading: false,
 	error: '',
+	filtered: {
+		sortBy: 'rating',
+		sortOrder: 'desc',
+		activeCategory: 0,
+	},
 }
 
 export const pizzaSlice = createSlice({
@@ -23,6 +33,15 @@ export const pizzaSlice = createSlice({
 	reducers: {
 		setPizzaPage(state, { payload }) {
 			state.pizzaPage = payload
+		},
+
+		setFilteredSort(state, { payload }: PayloadAction<{ sortBy: string; sortOrder: string }>) {
+			state.filtered.sortBy = payload.sortBy
+			state.filtered.sortOrder = payload.sortOrder
+		},
+
+		setFilteredCategory(state, { payload }: PayloadAction<number>) {
+			state.filtered.activeCategory = payload
 		},
 	},
 	extraReducers: {

@@ -6,22 +6,26 @@ import PizzaList from '../../components/PizzaList'
 import Sort from '../../components/Sort'
 
 import { useGetPizzaPageQuery } from '../../services/api'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
 
 import s from './styles.module.scss'
 
 const HomePage: React.FC = () => {
 	const [currentPage, setPage] = React.useState(1)
 
-	//TODO перенести в Redux категории фильтрации и сортировку
-	const [category, setCategory] = React.useState<number>(0)
-	const [filtered, setFiltered] = React.useState({ sortBy: 'rating', sortOrder: 'desc' })
+	const dispatch = useAppDispatch()
+
+	const { setFilteredSort, setFilteredCategory } = pizzaSlice.actions
+
+	const { activeCategory, sortBy, sortOrder } = useAppSelector(state => state.pizzaReducer.filtered)
 
 	const { data, error, isLoading } = useGetPizzaPageQuery({
 		page: currentPage,
 		limit: 4,
-		category: category,
-		sortBy: filtered.sortBy,
-		sortOrder: filtered.sortOrder,
+		activeCategory,
+		sortBy,
+		sortOrder,
 	})
 
 	const selectedPageHandler = (page: number) => {
@@ -29,18 +33,19 @@ const HomePage: React.FC = () => {
 	}
 
 	const selectedSort = (sortBy: string, sortOrder: string) => {
-		setFiltered({ sortBy, sortOrder })
+		dispatch(setFilteredSort({ sortBy, sortOrder }))
+		// dispatch()
 	}
 
 	const selectedCategory = (catId: number) => {
-		setCategory(catId)
+		dispatch(setFilteredCategory(catId))
 	}
 
 	return (
 		<div className={s.container}>
 			<div className={s.container__top}>
-				<Categories selectedCategory={selectedCategory} />
-				<Sort selectedSort={selectedSort} />
+				<Categories selectedCategory={selectedCategory} activeCategory={activeCategory} />
+				<Sort selectedSort={selectedSort} sortBy={sortBy} sortOrder={sortOrder} />
 			</div>
 			<h2 className={s.title}>Все пиццы</h2>
 			<PizzaList pizzaData={data} isLoading={isLoading} />

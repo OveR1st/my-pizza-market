@@ -6,11 +6,14 @@ import s from './styles.module.scss'
 
 interface IProps {
 	selectedSort: (sortBy: string, sortOrder: string) => void
+	sortBy: string
+	sortOrder: string
 }
 
-const Sort: React.FC<IProps> = ({ selectedSort }) => {
+const Sort: React.FC<IProps> = ({ selectedSort, sortBy, sortOrder }) => {
 	const [activeSortParam, setActiveSortParam] = React.useState(0)
 	const [isOpenPopup, setIsOpenPopup] = React.useState(false)
+
 	const sortParamsArray = [
 		'популярности (DESC)',
 		'популярности (ASC)',
@@ -22,8 +25,24 @@ const Sort: React.FC<IProps> = ({ selectedSort }) => {
 
 	const sortName = sortParamsArray[activeSortParam]
 
+	React.useEffect(() => {
+		let convertSortName = ''
+		switch (sortBy) {
+			case 'rating':
+				convertSortName = 'популярности'
+				break
+			case 'price':
+				convertSortName = 'цене'
+				break
+			case 'title':
+				convertSortName = 'алфавиту'
+				break
+		}
+		const sortIndex = sortParamsArray.indexOf(`${convertSortName} (${sortOrder.toUpperCase()})`)
+		setActiveSortParam(sortIndex)
+	}, [sortBy, sortOrder])
+
 	const selectedParamHandler = (param: string, i: number) => {
-		setActiveSortParam(i)
 		let [paramName, order] = param.split(' ')
 
 		const newStr = order.replace(/[{()}]/g, '').toLowerCase()
@@ -39,8 +58,6 @@ const Sort: React.FC<IProps> = ({ selectedSort }) => {
 				paramName = 'title'
 				break
 		}
-		// console.log('newStr', newStr)
-		// console.log('paramName', paramName)
 
 		selectedSort(paramName, newStr)
 		setIsOpenPopup(false)
