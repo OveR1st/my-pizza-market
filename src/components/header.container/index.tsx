@@ -5,9 +5,12 @@ import s from './styles.module.scss'
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg'
 import { ReactComponent as SearchSVG } from '../../assets/search.svg'
 import { ReactComponent as CartSVG } from '../../assets/cart.svg'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
 
 const HeaderContainer: React.FC = () => {
+	const param = useLocation()
+	const isCartPage = param.pathname === '/cart'
+
 	return (
 		<header className={s.wrapper}>
 			<div className={s.container}>
@@ -22,19 +25,23 @@ const HeaderContainer: React.FC = () => {
 						</div>
 					</div>
 				</Link>
-				<div className={s.searchContainer}>
-					<SearchSVG />
-					<input type="text" placeholder="Поиск пиццы..." />
-				</div>
-				<div className={s.cartContainer}>
-					<Link to="/cart">
-						<span>0 $</span>
-						<div className={s.delimiter}></div>
-						<div className={s.cartLength}>
-							<CartSVG /> 0
-						</div>
-					</Link>
-				</div>
+				{!isCartPage && (
+					<div className={s.searchContainer}>
+						<SearchSVG />
+						<input type="text" placeholder="Поиск пиццы..." />
+					</div>
+				)}
+				{!isCartPage && (
+					<div className={s.cartContainer}>
+						<Link to="/cart">
+							<span>0 $</span>
+							<div className={s.delimiter}></div>
+							<div className={s.cartLength}>
+								<CartSVG /> 0
+							</div>
+						</Link>
+					</div>
+				)}
 			</div>
 		</header>
 	)
