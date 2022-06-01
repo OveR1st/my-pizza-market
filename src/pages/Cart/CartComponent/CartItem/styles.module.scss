@@ -1,0 +1,183 @@
+@mixin btn {
+	-webkit-touch-callout: none;
+	border: 2px solid #fe5f1e;
+	background-color: white;
+	border-radius: 30px;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+	-webkit-user-select: none;
+	user-select: none;
+	align-items: center;
+	border-width: 2px;
+	display: flex;
+	height: 32px;
+	justify-content: center;
+	min-width: 32px;
+	width: 32px;
+
+	&:disabled {
+		// border: 2px solid #fe5f1e;
+		border-color: #787878;
+		opacity: 0.4;
+
+		svg path {
+			fill: #787878;
+		}
+
+		&:hover {
+			background-color: transparent;
+		}
+	}
+
+	&:disabled:hover {
+		svg path {
+			fill: #787878;
+		}
+	}
+
+	&:disabled:active {
+		background-color: transparent;
+		transform: translateY(0px);
+	}
+
+	&:hover {
+		background-color: #fe5f1e;
+		svg path {
+			fill: white;
+		}
+	}
+
+	&:active {
+		background-color: #f24701;
+		transform: translateY(1px);
+	}
+}
+
+.cartItem {
+	border-top: 1px solid #f6f6f6;
+	display: flex;
+	margin-top: 30px;
+	padding-top: 30px;
+	width: 100%;
+	justify-content: space-between;
+
+	&__img {
+		align-items: center;
+		display: flex;
+		margin-right: 15px;
+		width: 10%;
+
+		img {
+			height: 80px;
+			width: 80px;
+		}
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+
+		width: 40%;
+
+		h3 {
+			font-size: 22px;
+			font-weight: 700;
+			letter-spacing: 0.01em;
+			line-height: 27px;
+		}
+
+		p {
+			color: #8d8d8d;
+			font-size: 18px;
+		}
+	}
+
+	&__count {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		width: 13%;
+
+		.minus {
+			@include btn;
+
+			svg path:first-of-type {
+				display: none;
+			}
+		}
+
+		b {
+			font-size: 22px;
+		}
+
+		.plus {
+			@include btn;
+		}
+	}
+
+	&__price {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		width: 33%;
+
+		b {
+			font-size: 22px;
+			font-weight: 700;
+			letter-spacing: 0.01em;
+		}
+	}
+
+	&__remove {
+		align-items: center;
+		display: flex;
+		justify-content: flex-end;
+		width: 4%;
+
+		.removeBtn {
+			@include btn;
+
+			border-color: #d0d0d0;
+
+			svg {
+				height: 11.5px;
+				position: relative;
+				width: 11.5px;
+
+				path {
+					fill: #d0d0d0;
+				}
+			}
+
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+
+			&:hover {
+				background-color: #2a2a2a;
+				border-color: #2a2a2a;
+
+				svg path {
+					fill: white;
+				}
+			}
+
+			&:active {
+				background-color: #2a2a2a;
+				-webkit-transform: rotate(45deg);
+				transform: rotate(45deg);
+
+				transform: rotate(45deg) translateY(1px);
+			}
+
+			&:active:hover {
+				-webkit-transform: rotate(45deg);
+				transform: rotate(45deg);
+
+				background-color: #2a2a2a;
+			}
+		}
+	}
+}

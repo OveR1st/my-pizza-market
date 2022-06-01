@@ -4,7 +4,7 @@ import s from './styles.module.scss'
 
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg'
 import { ReactComponent as SearchSVG } from '../../assets/search.svg'
-import { ReactComponent as CartSVG } from '../../assets/cart.svg'
+import { ReactComponent as CartSVG } from '../../assets/cartWhite.svg'
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
 
 const HeaderContainer: React.FC = () => {
