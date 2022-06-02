@@ -1,9 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
 import { IPizza, TPizzaCart } from '../../models/IPizza'
 
 interface ICart {
 	items: TPizzaCart[]
 	totalPrice: number
+	totalItems: number
 }
 
 /**
@@ -21,14 +22,40 @@ interface ICart {
 const initialState: ICart = {
 	items: [],
 	totalPrice: 0,
+	totalItems: 0,
 }
 
-const cartSlice = createSlice({
+export const cartSlice = createSlice({
 	name: 'Cart',
 	initialState: initialState,
 	reducers: {
-		setCart(state, { payload }: PayloadAction<TPizzaCart>) {
-			state.items.push(payload)
+		addPizzaToCart(state, { payload }: PayloadAction<TPizzaCart>) {
+			const items = current(state).items
+			const pizzaInCart = items.find(el => el.title === payload.title)
+
+			if (pizzaInCart) {
+				//update pizza
+				const pizzaInCartIndex = items.findIndex(el => el.id === pizzaInCart.id)
+
+				const updatePizzaCart = {
+					id: pizzaInCart.id,
+					imageUrl: pizzaInCart.imageUrl,
+					pizzaCount: pizzaInCart.pizzaCount + 1,
+					price: pizzaInCart.price + payload.price,
+					title: pizzaInCart.title,
+					sizes: payload.sizes,
+					types: payload.types,
+				}
+
+				state.items[pizzaInCartIndex] = updatePizzaCart
+				state.totalPrice += payload.price
+				state.totalItems += payload.pizzaCount
+			} else {
+				//add new pizza
+				state.items.push(payload)
+				state.totalPrice += payload.price
+				state.totalItems += payload.pizzaCount
+			}
 		},
 	},
 	// extraReducers:

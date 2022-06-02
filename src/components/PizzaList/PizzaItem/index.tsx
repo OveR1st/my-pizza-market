@@ -6,6 +6,8 @@ import s from './styles.module.scss'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import clsx from 'clsx'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+import { cartSlice } from '../../../store/reducers/cartSlice.reducer'
 
 interface IProps {
 	imageUrl: string
@@ -20,7 +22,31 @@ interface IProps {
 const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, sizes, types }) => {
 	const [pizzaType, setPizzaType] = React.useState(0)
 	const [pizzaSize, setPizzaSize] = React.useState(0)
+
+	const dispatch = useAppDispatch()
+
+	const { addPizzaToCart } = cartSlice.actions
+
+	const pizzaAddHandler = () => {
+		dispatch(
+			addPizzaToCart({
+				id,
+				imageUrl,
+				pizzaCount: 1,
+				price,
+				sizes: [pizzaSize],
+				title,
+				types: [pizzaType],
+			})
+		)
+	}
+
 	const typeName = ['тонкое', 'традиционное']
+
+	const pizzaCount = useAppSelector(
+		state => state.cartReducer.items.find(el => el.id === id)?.pizzaCount
+	)
+
 	return (
 		<div className={s.pizzaItem}>
 			<Link to={`/pizza/${id}`}>
@@ -72,10 +98,10 @@ const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, si
 				{isLoading ? (
 					<Skeleton height={'2.75rem'} width={'8.675625rem'} count={1} borderRadius={'30px'} />
 				) : (
-					<button className={s.addBtn}>
+					<button onClick={pizzaAddHandler} className={s.addBtn}>
 						<AddSVG />
 						<span>Добавить</span>
-						<i>1</i>
+						{pizzaCount && <i>{pizzaCount}</i>}
 					</button>
 				)}
 			</div>

@@ -6,10 +6,13 @@ import { ReactComponent as LogoSVG } from '../../assets/logo.svg'
 import { ReactComponent as SearchSVG } from '../../assets/search.svg'
 import { ReactComponent as CartSVG } from '../../assets/cartWhite.svg'
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
+import { useAppSelector } from '../../store/hooks'
 
 const HeaderContainer: React.FC = () => {
 	const param = useLocation()
 	const isCartPage = param.pathname === '/cart'
+
+	const { totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
 
 	return (
 		<header className={s.wrapper}>
@@ -34,10 +37,10 @@ const HeaderContainer: React.FC = () => {
 				{!isCartPage && (
 					<div className={s.cartContainer}>
 						<Link to="/cart">
-							<span>0 $</span>
+							<span>{totalPrice} $</span>
 							<div className={s.delimiter}></div>
 							<div className={s.cartLength}>
-								<CartSVG /> 0
+								<CartSVG /> {totalItems}
 							</div>
 						</Link>
 					</div>
