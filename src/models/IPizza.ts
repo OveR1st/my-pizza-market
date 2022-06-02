@@ -7,4 +7,11 @@ export interface IPizza {
 	price: number
 	category: number
 	rating: number
+	pizzaCount: number
 }
+
+export type TPizzaCart = Pick<
+	IPizza,
+	'id' | 'imageUrl' | 'title' | 'price' | 'pizzaCount' | 'types' | 'sizes'
+>
+// type TodoInfo = Omit<Todo, "completed" | "createdAt">;

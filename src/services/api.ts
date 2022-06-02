@@ -25,8 +25,16 @@ export const pizzaApi = createApi({
 				}&sortBy=${sortBy}&order=${sortOrder}`,
 
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+				// console.log('OK')
+
 				try {
 					const { data } = await queryFulfilled
+					// const newData = data.map(el => {
+					// 	return { ...el, cartCount: 1 }
+					// })
+					// console.log('newData', newData)
+					// console.log('data', data)
+
 					// `onSuccess` side-effect
 					dispatch(pizzaSlice.actions.setPizzaPage(data))
 				} catch (err) {

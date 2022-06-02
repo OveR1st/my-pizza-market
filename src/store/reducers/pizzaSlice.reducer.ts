@@ -31,7 +31,7 @@ export const pizzaSlice = createSlice({
 	name: 'Pizza',
 	initialState,
 	reducers: {
-		setPizzaPage(state, { payload }) {
+		setPizzaPage(state, { payload }: PayloadAction<IPizza[]>) {
 			state.pizzaPage = payload
 		},
 
