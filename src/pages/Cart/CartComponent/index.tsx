@@ -3,16 +3,23 @@ import React from 'react'
 import { ReactComponent as CartBlackSVG } from '../../../assets/cartBlack.svg'
 import { ReactComponent as GarbageSVG } from '../../../assets/garbage.svg'
 import { ReactComponent as BackArrowSVG } from '../../../assets/backArrow.svg'
+
+import { Link } from 'react-router-dom'
+import { cartSlice } from '../../../store/reducers/cartSlice.reducer'
+import { useAppSelector } from '../../../store/hooks'
+
 import CartItem from './CartItem'
 
 import s from './styles.module.scss'
-import { Link } from 'react-router-dom'
 
 const CartComponent: React.FC = () => {
 	/**
 	 * //TODO
 	 * 1. Перенести все кнопки в миксины, убрать копирование scss кода
 	 */
+
+	const pizzaItems = useAppSelector(state => state.cartReducer.items)
+
 	return (
 		<>
 			<div className={s.cartTop}>
@@ -26,7 +33,9 @@ const CartComponent: React.FC = () => {
 				</div>
 			</div>
 			<div className={s.cartItems}>
-				<CartItem />
+				{pizzaItems.map(pizza => {
+					return <CartItem key={pizza.id} {...pizza} />
+				})}
 			</div>
 			<div className={s.cartBottom}>
 				<div className={s.cartBottom__details}>
