@@ -12,6 +12,7 @@ export interface IReposState {
 		sortBy: string
 		sortOrder: string
 		activeCategory: number
+		searchPizza: string
 	}
 }
 
@@ -24,6 +25,7 @@ const initialState: IReposState = {
 		sortBy: 'rating',
 		sortOrder: 'desc',
 		activeCategory: 0,
+		searchPizza: '',
 	},
 }
 
@@ -42,6 +44,10 @@ export const pizzaSlice = createSlice({
 
 		setFilteredCategory(state, { payload }: PayloadAction<number>) {
 			state.filtered.activeCategory = payload
+		},
+
+		setFilteredSearch(state, { payload }: PayloadAction<string>) {
+			state.filtered.searchPizza = payload
 		},
 	},
 	extraReducers: {

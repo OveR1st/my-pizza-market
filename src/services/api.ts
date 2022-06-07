@@ -9,6 +9,7 @@ interface Page {
 	activeCategory: number
 	sortBy: string
 	sortOrder: string
+	searchPizza: string
 }
 
 const baseURL = 'https://626d16545267c14d5677d9c2.mockapi.io'
@@ -19,10 +20,10 @@ export const pizzaApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
 	endpoints: builder => ({
 		getPizzaPage: builder.query<IPizza[], Page>({
-			query: ({ limit, page, activeCategory, sortBy, sortOrder }) =>
+			query: ({ limit, page, activeCategory, sortBy, sortOrder, searchPizza }) =>
 				`items?page=${page}&limit=${limit}${
 					activeCategory !== 0 ? `&category=${activeCategory}` : ''
-				}&sortBy=${sortBy}&order=${sortOrder}`,
+				}&sortBy=${sortBy}&order=${sortOrder}${searchPizza ? `&search=${searchPizza}` : ''}`,
 
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				// console.log('OK')

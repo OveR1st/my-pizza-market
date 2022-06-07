@@ -6,13 +6,23 @@ import { ReactComponent as LogoSVG } from '../../assets/logo.svg'
 import { ReactComponent as SearchSVG } from '../../assets/search.svg'
 import { ReactComponent as CartSVG } from '../../assets/cartWhite.svg'
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
-import { useAppSelector } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+
+import debounce from 'lodash.debounce'
+import { pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
 
 const HeaderContainer: React.FC = () => {
 	const param = useLocation()
+	const dispatch = useAppDispatch()
 	const isCartPage = param.pathname === '/cart'
 
+	const { setFilteredSearch } = pizzaSlice.actions
 	const { totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
+	const searchHandler = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(setFilteredSearch(e.target.value))
+	}, 1000)
+
+	console.log('RENDER HEADER WITH SEARCH')
 
 	return (
 		<header className={s.wrapper}>
@@ -31,7 +41,7 @@ const HeaderContainer: React.FC = () => {
 				{!isCartPage && (
 					<div className={s.searchContainer}>
 						<SearchSVG />
-						<input type="text" placeholder="Поиск пиццы..." />
+						<input onChange={e => searchHandler(e)} type="text" placeholder="Поиск пиццы..." />
 					</div>
 				)}
 				{!isCartPage && (

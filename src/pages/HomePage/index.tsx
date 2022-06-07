@@ -18,7 +18,9 @@ const HomePage: React.FC = () => {
 
 	const { setFilteredSort, setFilteredCategory } = pizzaSlice.actions
 
-	const { activeCategory, sortBy, sortOrder } = useAppSelector(state => state.pizzaReducer.filtered)
+	const { activeCategory, sortBy, sortOrder, searchPizza } = useAppSelector(
+		state => state.pizzaReducer.filtered
+	)
 
 	const { data, error, isLoading } = useGetPizzaPageQuery({
 		page: currentPage,
@@ -26,6 +28,7 @@ const HomePage: React.FC = () => {
 		activeCategory,
 		sortBy,
 		sortOrder,
+		searchPizza,
 	})
 
 	const selectedPageHandler = (page: number) => {
