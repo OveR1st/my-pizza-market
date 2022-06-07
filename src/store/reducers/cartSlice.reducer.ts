@@ -79,6 +79,20 @@ export const cartSlice = createSlice({
 				}
 			}
 		},
+
+		pizzaDeleteCart(state, { payload }: PayloadAction<string>) {
+			const items = current(state).items
+			const pizzaInCartIndex = items.findIndex(el => el.id === payload)
+
+			state.totalItems -= state.items[pizzaInCartIndex].pizzaCount || state.totalItems
+			state.totalPrice -= state.items[pizzaInCartIndex].price || state.totalPrice
+
+			state.items.splice(pizzaInCartIndex, 1)
+		},
+
+		clearCart(state, { payload }: PayloadAction<undefined>) {
+			return initialState
+		},
 	},
 	// extraReducers:
 })

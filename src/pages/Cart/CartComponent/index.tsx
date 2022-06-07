@@ -18,14 +18,20 @@ const CartComponent: React.FC = () => {
 	 * 1. Перенести все кнопки в миксины, убрать копирование scss кода
 	 */
 	const dispatch = useAppDispatch()
-	const { pizzaIncOrDec } = cartSlice.actions
+	const { pizzaIncOrDec, pizzaDeleteCart, clearCart } = cartSlice.actions
 	const { items, totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
 
-	console.log('RENDER')
-
-	const pizzaIncrementHandler = React.useCallback((id: string, isInc: boolean) => {
+	const pizzaIncOrDecHandler = React.useCallback((id: string, isInc: boolean) => {
 		dispatch(pizzaIncOrDec({ id, isInc }))
 	}, [])
+
+	const pizzaDeleteCartHandler = React.useCallback((id: string) => {
+		dispatch(pizzaDeleteCart(id))
+	}, [])
+
+	const clearCartHandler = () => {
+		dispatch(clearCart())
+	}
 
 	return (
 		<>
@@ -34,7 +40,7 @@ const CartComponent: React.FC = () => {
 					<CartBlackSVG />
 					Корзина
 				</h2>
-				<div className={s.cartTop__clear}>
+				<div onClick={() => clearCartHandler()} className={s.cartTop__clear}>
 					<GarbageSVG />
 					<span>Очистить корзину</span>
 				</div>
@@ -42,7 +48,12 @@ const CartComponent: React.FC = () => {
 			<div className={s.cartItems}>
 				{items.map(pizza => {
 					return (
-						<CartItem key={pizza.id} pizza={pizza} pizzaIncrementHandler={pizzaIncrementHandler} />
+						<CartItem
+							key={pizza.id}
+							pizza={pizza}
+							pizzaIncOrDecHandler={pizzaIncOrDecHandler}
+							pizzaDeleteCartHandler={pizzaDeleteCartHandler}
+						/>
 					)
 				})}
 			</div>

@@ -7,13 +7,15 @@ import s from './styles.module.scss'
 
 interface IProps {
 	pizza: TPizzaCart
-	pizzaIncrementHandler: (id: string, isInc: boolean) => void
+	pizzaIncOrDecHandler: (id: string, isInc: boolean) => void
+	pizzaDeleteCartHandler: (id: string) => void
 }
 
 const CartItem: React.FC<IProps> = React.memo(
 	({
 		pizza: { id, imageUrl, pizzaCount, price, sizes, title, types, initPrice },
-		pizzaIncrementHandler,
+		pizzaIncOrDecHandler,
+		pizzaDeleteCartHandler,
 	}) => {
 		console.log('RENDER ITEM', id)
 
@@ -29,13 +31,13 @@ const CartItem: React.FC<IProps> = React.memo(
 				<div className={s.cartItem__count}>
 					<button
 						disabled={pizzaCount === 1 ? true : false}
-						onClick={() => pizzaIncrementHandler(id, false)}
+						onClick={() => pizzaIncOrDecHandler(id, false)}
 						className={s.minus}
 					>
 						<MinusPlusClose />
 					</button>
 					<b>{pizzaCount}</b>
-					<button onClick={() => pizzaIncrementHandler(id, true)} className={s.plus}>
+					<button onClick={() => pizzaIncOrDecHandler(id, true)} className={s.plus}>
 						<MinusPlusClose />
 					</button>
 				</div>
@@ -43,7 +45,7 @@ const CartItem: React.FC<IProps> = React.memo(
 					<b>{price} ₽</b>
 				</div>
 				<div className={s.cartItem__remove}>
-					<div className={s.removeBtn}>
+					<div onClick={() => pizzaDeleteCartHandler(id)} className={s.removeBtn}>
 						<MinusPlusClose />
 					</div>
 				</div>
