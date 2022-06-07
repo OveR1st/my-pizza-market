@@ -57,6 +57,8 @@ export const cartSlice = createSlice({
 				state.totalItems += payload.pizzaCount
 			}
 		},
+
+		pizzaInrement(state, { payload }: PayloadAction<string>) {},
 	},
 	// extraReducers:
 })

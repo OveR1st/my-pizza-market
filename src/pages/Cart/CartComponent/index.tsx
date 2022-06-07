@@ -18,8 +18,14 @@ const CartComponent: React.FC = () => {
 	 * 1. Перенести все кнопки в миксины, убрать копирование scss кода
 	 */
 
+	const { pizzaInrement } = cartSlice.actions
 	const { items, totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
+
 	console.log('RENDER')
+
+	const pizzaIncrementHandler = (id: string) => {
+		console.log('ID CURRENT INC', id)
+	}
 
 	return (
 		<>
@@ -35,7 +41,9 @@ const CartComponent: React.FC = () => {
 			</div>
 			<div className={s.cartItems}>
 				{items.map(pizza => {
-					return <CartItem key={pizza.id} {...pizza} />
+					return (
+						<CartItem key={pizza.id} pizza={pizza} pizzaIncrementHandler={pizzaIncrementHandler} />
+					)
 				})}
 			</div>
 			<div className={s.cartBottom}>

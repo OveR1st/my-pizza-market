@@ -5,14 +5,14 @@ import { TPizzaCart } from '../../../../models/IPizza'
 
 import s from './styles.module.scss'
 
-const CartItem: React.FC<TPizzaCart> = ({
-	id,
-	imageUrl,
-	pizzaCount,
-	price,
-	sizes,
-	title,
-	types,
+interface IProps {
+	pizza: TPizzaCart
+	pizzaIncrementHandler: (id: string) => void
+}
+
+const CartItem: React.FC<IProps> = ({
+	pizza: { id, imageUrl, pizzaCount, price, sizes, title, types },
+	pizzaIncrementHandler,
 }) => {
 	return (
 		<div className={s.cartItem}>
@@ -28,7 +28,7 @@ const CartItem: React.FC<TPizzaCart> = ({
 					<MinusPlusClose />
 				</button>
 				<b>{pizzaCount}</b>
-				<button className={s.plus}>
+				<button onClick={() => pizzaIncrementHandler(id)} className={s.plus}>
 					<MinusPlusClose />
 				</button>
 			</div>
