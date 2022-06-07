@@ -8,10 +8,11 @@ export interface IPizza {
 	category: number
 	rating: number
 	pizzaCount: number
+	initPrice: number
 }
 
 export type TPizzaCart = Pick<
 	IPizza,
-	'id' | 'imageUrl' | 'title' | 'price' | 'pizzaCount' | 'types' | 'sizes'
+	'id' | 'imageUrl' | 'title' | 'price' | 'pizzaCount' | 'types' | 'sizes' | 'initPrice'
 >
 // type TodoInfo = Omit<Todo, "completed" | "createdAt">;

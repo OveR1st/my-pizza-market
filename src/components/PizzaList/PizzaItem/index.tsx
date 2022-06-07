@@ -37,6 +37,7 @@ const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, si
 				sizes: [pizzaSize],
 				title,
 				types: [pizzaType],
+				initPrice: price,
 			})
 		)
 	}

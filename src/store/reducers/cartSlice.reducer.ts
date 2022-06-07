@@ -38,27 +38,47 @@ export const cartSlice = createSlice({
 				const pizzaInCartIndex = items.findIndex(el => el.id === pizzaInCart.id)
 
 				const updatePizzaCart = {
-					id: pizzaInCart.id,
-					imageUrl: pizzaInCart.imageUrl,
+					...pizzaInCart,
 					pizzaCount: pizzaInCart.pizzaCount + 1,
-					price: pizzaInCart.price + payload.price,
-					title: pizzaInCart.title,
-					sizes: payload.sizes,
-					types: payload.types,
-				}
+					price: pizzaInCart.price + payload.initPrice,
+				} as TPizzaCart
 
 				state.items[pizzaInCartIndex] = updatePizzaCart
-				state.totalPrice += payload.price
-				state.totalItems += payload.pizzaCount
+				state.totalPrice += payload.initPrice
+				state.totalItems += 1
 			} else {
 				//add new pizza
 				state.items.push(payload)
-				state.totalPrice += payload.price
-				state.totalItems += payload.pizzaCount
+				state.totalPrice += payload.initPrice
+				state.totalItems += 1
 			}
 		},
 
-		pizzaInrement(state, { payload }: PayloadAction<string>) {},
+		pizzaIncOrDec(state, { payload }: PayloadAction<{ id: string; isInc: boolean }>) {
+			const items = current(state).items
+			const pizzaInCart = items.find(el => el.id === payload.id)
+
+			if (pizzaInCart) {
+				const pizzaInCartIndex = items.findIndex(el => el.id === pizzaInCart.id)
+				const updatePizzaCart = {
+					...pizzaInCart,
+					pizzaCount: payload.isInc ? pizzaInCart.pizzaCount + 1 : pizzaInCart.pizzaCount - 1,
+					price: payload.isInc
+						? pizzaInCart.price + pizzaInCart.initPrice
+						: pizzaInCart.price - pizzaInCart.initPrice,
+				} as TPizzaCart
+
+				state.items[pizzaInCartIndex] = updatePizzaCart
+
+				if (payload.isInc) {
+					state.totalPrice += pizzaInCart.initPrice
+					state.totalItems += 1
+				} else {
+					state.totalPrice -= pizzaInCart.initPrice
+					state.totalItems -= 1
+				}
+			}
+		},
 	},
 	// extraReducers:
 })

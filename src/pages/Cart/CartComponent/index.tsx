@@ -6,7 +6,7 @@ import { ReactComponent as BackArrowSVG } from '../../../assets/backArrow.svg'
 
 import { Link } from 'react-router-dom'
 import { cartSlice } from '../../../store/reducers/cartSlice.reducer'
-import { useAppSelector } from '../../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 
 import CartItem from './CartItem'
 
@@ -17,15 +17,15 @@ const CartComponent: React.FC = () => {
 	 * //TODO
 	 * 1. Перенести все кнопки в миксины, убрать копирование scss кода
 	 */
-
-	const { pizzaInrement } = cartSlice.actions
+	const dispatch = useAppDispatch()
+	const { pizzaIncOrDec } = cartSlice.actions
 	const { items, totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
 
 	console.log('RENDER')
 
-	const pizzaIncrementHandler = (id: string) => {
-		console.log('ID CURRENT INC', id)
-	}
+	const pizzaIncrementHandler = React.useCallback((id: string, isInc: boolean) => {
+		dispatch(pizzaIncOrDec({ id, isInc }))
+	}, [])
 
 	return (
 		<>
