@@ -6,47 +6,53 @@ import s from './styles.module.scss'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import clsx from 'clsx'
-import { useAppDispatch, useAppSelector } from '../../../store/hooks'
-import { cartSlice } from '../../../store/reducers/cartSlice.reducer'
+// import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+// import { cartSlice } from '../../../store/reducers/cartSlice.reducer'
 
 interface IProps {
 	imageUrl: string
 	price: number
 	title: string
-	isLoading: boolean
+	// isLoading: boolean
 	id: string
 	sizes: number[]
 	types: number[]
 }
 
-const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, sizes, types }) => {
+const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, sizes, types }) => {
 	const [pizzaType, setPizzaType] = React.useState(0)
 	const [pizzaSize, setPizzaSize] = React.useState(0)
 
-	const dispatch = useAppDispatch()
+	const [isLoading, setIsLoading] = React.useState(true)
 
-	const { addPizzaToCart } = cartSlice.actions
+	// const dispatch = useAppDispatch()
+
+	// const { addPizzaToCart } = cartSlice.actions
+
+	React.useEffect(() => {
+		setTimeout(() => setIsLoading(false), 1000)
+	}, [])
 
 	const pizzaAddHandler = () => {
-		dispatch(
-			addPizzaToCart({
-				id,
-				imageUrl,
-				pizzaCount: 1,
-				price,
-				sizes: [pizzaSize],
-				title,
-				types: [pizzaType],
-				initPrice: price,
-			})
-		)
+		// dispatch(
+		// 	addPizzaToCart({
+		// 		id,
+		// 		imageUrl,
+		// 		pizzaCount: 1,
+		// 		price,
+		// 		sizes: [pizzaSize],
+		// 		title,
+		// 		types: [pizzaType],
+		// 		initPrice: price,
+		// 	})
+		// )
 	}
 
 	const typeName = ['тонкое', 'традиционное']
 
-	const pizzaCount = useAppSelector(
-		state => state.cartReducer.items.find(el => el.id === id)?.pizzaCount
-	)
+	// const pizzaCount = useAppSelector(
+	// 	state => state.cartReducer.items.find(el => el.id === id)?.pizzaCount
+	// )
 
 	return (
 		<div className={s.pizzaItem}>
@@ -102,7 +108,7 @@ const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, si
 					<button onClick={pizzaAddHandler} className={s.addBtn}>
 						<AddSVG />
 						<span>Добавить</span>
-						{pizzaCount && <i>{pizzaCount}</i>}
+						<i>{1}</i>
 					</button>
 				)}
 			</div>

@@ -5,8 +5,8 @@ import { ReactComponent as GarbageSVG } from '../../../assets/garbage.svg'
 import { ReactComponent as BackArrowSVG } from '../../../assets/backArrow.svg'
 
 import { Link } from 'react-router-dom'
-import { cartSlice } from '../../../store/reducers/cartSlice.reducer'
-import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+// import { cartSlice } from '../../../store/reducers/cartSlice.reducer'
+// import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 
 import CartItem from './CartItem'
 
@@ -17,20 +17,20 @@ const CartComponent: React.FC = () => {
 	 * //TODO
 	 * 1. Перенести все кнопки в миксины, убрать копирование scss кода
 	 */
-	const dispatch = useAppDispatch()
-	const { pizzaIncOrDec, pizzaDeleteCart, clearCart } = cartSlice.actions
-	const { items, totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
+	// const dispatch = useAppDispatch()
+	// const { pizzaIncOrDec, pizzaDeleteCart, clearCart } = cartSlice.actions
+	// const { items, totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
 
 	const pizzaIncOrDecHandler = React.useCallback((id: string, isInc: boolean) => {
-		dispatch(pizzaIncOrDec({ id, isInc }))
+		// dispatch(pizzaIncOrDec({ id, isInc }))
 	}, [])
 
 	const pizzaDeleteCartHandler = React.useCallback((id: string) => {
-		dispatch(pizzaDeleteCart(id))
+		// dispatch(pizzaDeleteCart(id))
 	}, [])
 
 	const clearCartHandler = () => {
-		dispatch(clearCart())
+		// dispatch(clearCart())
 	}
 
 	return (
@@ -46,7 +46,7 @@ const CartComponent: React.FC = () => {
 				</div>
 			</div>
 			<div className={s.cartItems}>
-				{items.map(pizza => {
+				{/* {items.map(pizza => {
 					return (
 						<CartItem
 							key={pizza.id}
@@ -55,17 +55,17 @@ const CartComponent: React.FC = () => {
 							pizzaDeleteCartHandler={pizzaDeleteCartHandler}
 						/>
 					)
-				})}
+				})} */}
 			</div>
 			<div className={s.cartBottom}>
 				<div className={s.cartBottom__details}>
 					<span>
 						{' '}
-						Всего пицц: <b>{totalItems} шт.</b>{' '}
+						Всего пицц: <b>{1} шт.</b>{' '}
 					</span>
 					<span>
 						{' '}
-						Сумма заказа: <b>{totalPrice} ₽</b>{' '}
+						Сумма заказа: <b>{22} ₽</b>{' '}
 					</span>
 				</div>
 				<div className={s.cartBottom__btns}>

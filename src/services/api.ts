@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { pizzaSlice } from '../store/reducers/pizzaSlice.reducer'
+// import { pizzaSlice } from '../store/reducers/pizzaSlice.reducer'
 import { IPizza } from '../models/IPizza'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
@@ -37,7 +37,7 @@ export const pizzaApi = createApi({
 					// console.log('data', data)
 
 					// `onSuccess` side-effect
-					dispatch(pizzaSlice.actions.setPizzaPage(data))
+					// dispatch(pizzaSlice.actions.setPizzaPage(data))
 				} catch (err) {
 					// `onError` side-effect
 					// dispatch(messageCreated('Error fetching post!'))

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { fetchPizzaInfo } from '../../store/actionCreator'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { pizzaDataSelector, pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
+// import { fetchPizzaInfo } from '../../store/actionCreator'
+// import { useAppDispatch, useAppSelector } from '../../store/hooks'
+// import { pizzaDataSelector, pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
 import { useNavigate } from 'react-router-dom'
 
 import s from './styles.module.scss'
@@ -10,32 +10,32 @@ import Skeleton from 'react-loading-skeleton'
 
 const PizzaInfoPage: React.FC = () => {
 	let { number } = useParams()
-	const dispatch = useAppDispatch()
+	// const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const pizzaInfo = useAppSelector(state => pizzaDataSelector(state, String(number)))
-	const { pizzaQuery, isLoading } = useAppSelector(state => state.pizzaReducer)
+	// const pizzaInfo = useAppSelector(state => pizzaDataSelector(state, String(number)))
+	// const { pizzaQuery, isLoading } = useAppSelector(state => state.pizzaReducer)
 
 	// console.log('pizzaInfo', pizzaInfo)
 
-	React.useEffect(() => {
-		if (isNaN(Number(number))) {
-			//bad query path
-			navigate('error')
-		}
-		if (!pizzaInfo) {
-			dispatch(fetchPizzaInfo(String(number)))
-		}
-	}, [])
+	// React.useEffect(() => {
+	// 	if (isNaN(Number(number))) {
+	// 		//bad query path
+	// 		navigate('error')
+	// 	}
+	// 	if (!pizzaInfo) {
+	// 		dispatch(fetchPizzaInfo(String(number)))
+	// 	}
+	// }, [])
 
 	// pizzaSlice
 
-	console.log('isLoading', isLoading)
+	// console.log('isLoading', isLoading)
 
 	return (
 		<div className={s.wrapper}>
 			<div className={s.InfoPageContainer}>
-				<div className={s.InfoPageContainer__pizzaBlock}>
+				{/* <div className={s.InfoPageContainer__pizzaBlock}>
 					<div className={s.imgContainer}>
 						{isLoading ? (
 							<Skeleton circle height="80%" />
@@ -58,7 +58,7 @@ const PizzaInfoPage: React.FC = () => {
 							<span>Назад</span>
 						</div>
 					</Link>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

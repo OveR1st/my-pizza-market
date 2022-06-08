@@ -5,53 +5,56 @@ import Pagination from '../../components/Pagination'
 import PizzaList from '../../components/PizzaList'
 import Sort from '../../components/Sort'
 
+import tempPizza from '../../store/tempData.json'
+
 import { useGetPizzaPageQuery } from '../../services/api'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
+// import { useAppDispatch, useAppSelector } from '../../store/hooks'
+// import { pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
 
 import s from './styles.module.scss'
 
 const HomePage: React.FC = () => {
 	const [currentPage, setPage] = React.useState(1)
 
-	const dispatch = useAppDispatch()
+	// const dispatch = useAppDispatch()
+	console.log('tempPizza', tempPizza)
 
-	const { setFilteredSort, setFilteredCategory } = pizzaSlice.actions
+	// const { setFilteredSort, setFilteredCategory } = pizzaSlice.actions
 
-	const { activeCategory, sortBy, sortOrder, searchPizza } = useAppSelector(
-		state => state.pizzaReducer.filtered
-	)
+	// const { activeCategory, sortBy, sortOrder, searchPizza } = useAppSelector(
+	// 	state => state.pizzaReducer.filtered
+	// )
 
-	const { data, error, isLoading } = useGetPizzaPageQuery({
-		page: currentPage,
-		limit: 4,
-		activeCategory,
-		sortBy,
-		sortOrder,
-		searchPizza,
-	})
+	// const { data, error, isLoading } = useGetPizzaPageQuery({
+	// 	page: currentPage,
+	// 	limit: 4,
+	// 	activeCategory,
+	// 	sortBy,
+	// 	sortOrder,
+	// 	searchPizza,
+	// })
 
 	const selectedPageHandler = (page: number) => {
 		setPage(page)
 	}
 
 	const selectedSort = (sortBy: string, sortOrder: string) => {
-		dispatch(setFilteredSort({ sortBy, sortOrder }))
+		// dispatch(setFilteredSort({ sortBy, sortOrder }))
 		// dispatch()
 	}
 
 	const selectedCategory = (catId: number) => {
-		dispatch(setFilteredCategory(catId))
+		// dispatch(setFilteredCategory(catId))
 	}
 
 	return (
 		<div className={s.container}>
 			<div className={s.container__top}>
-				<Categories selectedCategory={selectedCategory} activeCategory={activeCategory} />
-				<Sort selectedSort={selectedSort} sortBy={sortBy} sortOrder={sortOrder} />
+				{/* <Categories selectedCategory={selectedCategory} activeCategory={activeCategory} />
+				<Sort selectedSort={selectedSort} sortBy={sortBy} sortOrder={sortOrder} /> */}
 			</div>
 			<h2 className={s.title}>Все пиццы</h2>
-			<PizzaList pizzaData={data} isLoading={isLoading} />
+			<PizzaList pizzaData={tempPizza} />
 			<Pagination selectedPageHandler={selectedPageHandler} currentPage={currentPage} />
 		</div>
 	)
