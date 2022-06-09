@@ -6,10 +6,12 @@ import s from './styles.module.scss'
 
 interface IProps {
 	pizzaData: IPizza[] | undefined
-	isLoading?: boolean
+	isLoading: boolean
 }
 
 const PizzaList: React.FC<IProps> = ({ pizzaData, isLoading }) => {
+	// console.log('PizzaList isLoading', isLoading)
+
 	// const [isLazyLoading, setIsLazyLoading] = React.useState(isLoading)
 
 	// React.useEffect(() => {
@@ -21,7 +23,7 @@ const PizzaList: React.FC<IProps> = ({ pizzaData, isLoading }) => {
 	return (
 		<div className={s.pizzaWrapper}>
 			{pizzaData?.map(pizza => {
-				return <PizzaItem key={pizza.id} {...pizza} />
+				return <PizzaItem key={pizza.id} {...pizza} isLoading={isLoading} />
 			})}
 		</div>
 	)

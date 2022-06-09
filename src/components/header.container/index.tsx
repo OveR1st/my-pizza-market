@@ -22,7 +22,7 @@ const HeaderContainer: React.FC = () => {
 		// dispatch(setFilteredSearch(e.target.value))
 	}, 1000)
 
-	console.log('RENDER HEADER WITH SEARCH')
+	// console.log('RENDER HEADER WITH SEARCH')
 
 	return (
 		<header className={s.wrapper}>

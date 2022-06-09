@@ -12,12 +12,13 @@ import { useGetPizzaPageQuery } from '../../services/api'
 // import { pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
 
 import s from './styles.module.scss'
+import { observer } from 'mobx-react'
+import { useStore } from '../../mobx/ContextProvider'
 
 const HomePage: React.FC = () => {
-	const [currentPage, setPage] = React.useState(1)
+	// const [currentPage, setPage] = React.useState(1)
 
 	// const dispatch = useAppDispatch()
-	console.log('tempPizza', tempPizza)
 
 	// const { setFilteredSort, setFilteredCategory } = pizzaSlice.actions
 
@@ -35,7 +36,7 @@ const HomePage: React.FC = () => {
 	// })
 
 	const selectedPageHandler = (page: number) => {
-		setPage(page)
+		// setPage(page)
 	}
 
 	const selectedSort = (sortBy: string, sortOrder: string) => {
@@ -47,17 +48,36 @@ const HomePage: React.FC = () => {
 		// dispatch(setFilteredCategory(catId))
 	}
 
+	const { pizzaStore } = useStore()
+
+	// console.log('pizzaStore pizzaPage', pizzaStore.pizzaPage)
+
+	React.useEffect(() => {
+		if (!pizzaStore.pizzaPage.length) {
+			console.log('query PIZZA')
+
+			pizzaStore.getPizzaApi()
+		}
+
+		return () => {
+			// console.log('unmount HomePage')
+		}
+	}, [])
+
+	// console.log('tempPizza', tempPizza)
+
 	return (
 		<div className={s.container}>
 			<div className={s.container__top}>
+				<button onClick={pizzaStore.increment}>{pizzaStore.value}</button>
 				{/* <Categories selectedCategory={selectedCategory} activeCategory={activeCategory} />
 				<Sort selectedSort={selectedSort} sortBy={sortBy} sortOrder={sortOrder} /> */}
 			</div>
 			<h2 className={s.title}>Все пиццы</h2>
-			<PizzaList pizzaData={tempPizza} />
-			<Pagination selectedPageHandler={selectedPageHandler} currentPage={currentPage} />
+			<PizzaList pizzaData={pizzaStore.pizzaPage} isLoading={pizzaStore.isLoading} />
+			{/* <Pagination selectedPageHandler={selectedPageHandler} currentPage={currentPage} /> */}
 		</div>
 	)
 }
 
-export default HomePage
+export default observer(HomePage)

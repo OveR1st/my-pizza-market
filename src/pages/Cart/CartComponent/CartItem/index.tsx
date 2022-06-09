@@ -17,7 +17,7 @@ const CartItem: React.FC<IProps> = React.memo(
 		pizzaIncOrDecHandler,
 		pizzaDeleteCartHandler,
 	}) => {
-		console.log('RENDER ITEM', id)
+		// console.log('RENDER ITEM', id)
 
 		return (
 			<div className={s.cartItem}>

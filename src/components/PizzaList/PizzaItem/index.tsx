@@ -13,25 +13,25 @@ interface IProps {
 	imageUrl: string
 	price: number
 	title: string
-	// isLoading: boolean
+	isLoading: boolean
 	id: string
 	sizes: number[]
 	types: number[]
 }
 
-const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, sizes, types }) => {
+const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, sizes, types, isLoading }) => {
 	const [pizzaType, setPizzaType] = React.useState(0)
 	const [pizzaSize, setPizzaSize] = React.useState(0)
 
-	const [isLoading, setIsLoading] = React.useState(true)
+	// const [isLoading, setIsLoading] = React.useState(true)
 
 	// const dispatch = useAppDispatch()
 
 	// const { addPizzaToCart } = cartSlice.actions
 
-	React.useEffect(() => {
-		setTimeout(() => setIsLoading(false), 1000)
-	}, [])
+	// React.useEffect(() => {
+	// 	setTimeout(() => setIsLoading(false), 1000)
+	// }, [])
 
 	const pizzaAddHandler = () => {
 		// dispatch(
