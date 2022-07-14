@@ -15,7 +15,6 @@ import s from './styles.module.scss'
 const CartComponent: React.FC = () => {
 	/**
 	 * //TODO
-	 * 1. Перенести все кнопки в миксины, убрать копирование scss кода
 	 */
 	const dispatch = useAppDispatch()
 	const { pizzaIncOrDec, pizzaDeleteCart, clearCart } = cartSlice.actions
