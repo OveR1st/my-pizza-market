@@ -9,8 +9,9 @@ interface IProps {
 	isLoading: boolean
 }
 
-const PizzaList: React.FC<IProps> = ({ pizzaData, isLoading }) => {
+const PizzaList: React.FC<IProps> = React.memo(({ pizzaData, isLoading }) => {
 	// console.log('PizzaList isLoading', isLoading)
+	console.log('render PizzaList')
 
 	// const [isLazyLoading, setIsLazyLoading] = React.useState(isLoading)
 
@@ -27,6 +28,6 @@ const PizzaList: React.FC<IProps> = ({ pizzaData, isLoading }) => {
 			})}
 		</div>
 	)
-}
+})
 
 export default PizzaList

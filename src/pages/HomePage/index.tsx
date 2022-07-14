@@ -63,6 +63,7 @@ const HomePage: React.FC = () => {
 			// console.log('unmount HomePage')
 		}
 	}, [])
+	console.log('render')
 
 	// console.log('tempPizza', tempPizza)
 
