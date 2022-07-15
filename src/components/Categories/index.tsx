@@ -4,15 +4,16 @@ import React from 'react'
 import s from './styles.module.scss'
 
 interface IProps {
-	selectedCategory: (catId: number) => void
+	setActiveCategory: (catId: number) => void
 	activeCategory: number
 }
 
-const Categories: React.FC<IProps> = ({ selectedCategory, activeCategory }) => {
+const Categories: React.FC<IProps> = React.memo(({ setActiveCategory, activeCategory }) => {
 	const category = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
+	console.log('render Categories', activeCategory)
 
-	const selectedCategoryHandler = (cat: string, i: number) => {
-		selectedCategory(i)
+	const selectedCategoryHandler = (i: number) => {
+		setActiveCategory(i)
 	}
 
 	return (
@@ -22,7 +23,7 @@ const Categories: React.FC<IProps> = ({ selectedCategory, activeCategory }) => {
 					return (
 						<li
 							key={i}
-							onClick={() => selectedCategoryHandler(cat, i)}
+							onClick={() => selectedCategoryHandler(i)}
 							className={clsx(activeCategory === i && s.active)}
 						>
 							{cat}
@@ -32,6 +33,6 @@ const Categories: React.FC<IProps> = ({ selectedCategory, activeCategory }) => {
 			</ul>
 		</div>
 	)
-}
+})
 
 export default Categories

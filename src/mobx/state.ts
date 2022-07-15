@@ -77,6 +77,10 @@ class CreatePizzaStore implements IReposState {
 		})
 	}
 
+	setActiveCategory(catId: number) {
+		this.filtered.activeCategory = catId
+	}
+
 	increment() {
 		this.value++
 	}

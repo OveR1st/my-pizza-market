@@ -35,6 +35,11 @@ const HomePage: React.FC = () => {
 	// 	searchPizza,
 	// })
 
+	const { pizzaPage, getPizzaApi, setActiveCategory, increment, value, isLoading, filtered } =
+		useStore().pizzaStore
+
+	console.log('pizzaPage', pizzaPage)
+
 	const selectedPageHandler = (page: number) => {
 		// setPage(page)
 	}
@@ -48,15 +53,13 @@ const HomePage: React.FC = () => {
 		// dispatch(setFilteredCategory(catId))
 	}
 
-	const { pizzaStore } = useStore()
-
 	// console.log('pizzaStore pizzaPage', pizzaStore.pizzaPage)
 
 	React.useEffect(() => {
-		if (!pizzaStore.pizzaPage.length) {
+		if (!pizzaPage.length) {
 			console.log('query PIZZA')
 
-			pizzaStore.getPizzaApi()
+			getPizzaApi()
 		}
 
 		return () => {
@@ -70,12 +73,15 @@ const HomePage: React.FC = () => {
 	return (
 		<div className={s.container}>
 			<div className={s.container__top}>
-				<button onClick={pizzaStore.increment}>{pizzaStore.value}</button>
-				{/* <Categories selectedCategory={selectedCategory} activeCategory={activeCategory} />
-				<Sort selectedSort={selectedSort} sortBy={sortBy} sortOrder={sortOrder} /> */}
+				<button onClick={increment}>{value}Test button</button>
+				<Categories
+					setActiveCategory={setActiveCategory}
+					activeCategory={filtered.activeCategory}
+				/>
+				{/*<Sort selectedSort={selectedSort} sortBy={sortBy} sortOrder={sortOrder} />*/}
 			</div>
 			<h2 className={s.title}>Все пиццы</h2>
-			<PizzaList pizzaData={pizzaStore.pizzaPage} isLoading={pizzaStore.isLoading} />
+			<PizzaList pizzaData={pizzaPage} isLoading={isLoading} />
 			{/* <Pagination selectedPageHandler={selectedPageHandler} currentPage={currentPage} /> */}
 		</div>
 	)
