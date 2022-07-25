@@ -34,4 +34,4 @@ const Categories: React.FC<IProps> = ({ selectedCategory, activeCategory }) => {
 	)
 }
 
-export default Categories
+export default React.memo(Categories)

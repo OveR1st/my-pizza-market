@@ -40,9 +40,9 @@ const HomePage: React.FC = () => {
 		// dispatch()
 	}
 
-	const selectedCategory = (catId: number) => {
+	const selectedCategory = React.useCallback((catId: number) => {
 		dispatch(setFilteredCategory(catId))
-	}
+	}, [])
 
 	return (
 		<div className={s.container}>
