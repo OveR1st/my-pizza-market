@@ -35,10 +35,9 @@ const HomePage: React.FC = () => {
 		setPage(page)
 	}
 
-	const selectedSort = (sortBy: string, sortOrder: string) => {
+	const selectedSort = React.useCallback((sortBy: string, sortOrder: string) => {
 		dispatch(setFilteredSort({ sortBy, sortOrder }))
-		// dispatch()
-	}
+	}, [])
 
 	const selectedCategory = React.useCallback((catId: number) => {
 		dispatch(setFilteredCategory(catId))

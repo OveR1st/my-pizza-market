@@ -89,4 +89,4 @@ const Sort: React.FC<IProps> = ({ selectedSort, sortBy, sortOrder }) => {
 	)
 }
 
-export default Sort
+export default React.memo(Sort)
