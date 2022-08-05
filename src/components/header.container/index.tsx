@@ -39,25 +39,25 @@ const HeaderContainer: React.FC = () => {
 					</div>
 				</Link>
 				{!isCartPage && (
-					<div className={s.searchContainer}>
-						<SearchSVG />
-						<input
-							onChange={e => searchHandler(e)}
-							type="text"
-							placeholder="Поиск пиццы..."
-						/>
-					</div>
-				)}
-				{!isCartPage && (
-					<div className={s.cartContainer}>
-						<Link to="/cart">
-							<span>{totalPrice} $</span>
-							<div className={s.delimiter}></div>
-							<div className={s.cartLength}>
-								<CartSVG /> {totalItems}
-							</div>
-						</Link>
-					</div>
+					<>
+						<div className={s.searchContainer}>
+							<SearchSVG />
+							<input
+								onChange={e => searchHandler(e)}
+								type="text"
+								placeholder="Поиск пиццы..."
+							/>
+						</div>
+						<div className={s.cartContainer}>
+							<Link to="/cart">
+								<span>{totalPrice} $</span>
+								<div className={s.delimiter}></div>
+								<div className={s.cartLength}>
+									<CartSVG /> {totalItems}
+								</div>
+							</Link>
+						</div>
+					</>
 				)}
 			</div>
 		</header>
