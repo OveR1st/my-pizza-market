@@ -9,20 +9,20 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 import debounce from 'lodash.debounce'
-import { pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
+import { filterSlice } from '../../store/reducers/filterSlice.reducer'
 
 const HeaderContainer: React.FC = () => {
 	const param = useLocation()
 	const dispatch = useAppDispatch()
 	const isCartPage = param.pathname === '/cart'
 
-	const { setFilteredSearch } = pizzaSlice.actions
+	const { setFilteredSearch } = filterSlice.actions
 	const { totalPrice, totalItems } = useAppSelector(state => state.cartReducer)
 	const searchHandler = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(setFilteredSearch(e.target.value))
 	}, 1000)
 
-	console.log('RENDER HEADER WITH SEARCH')
+	// console.log('RENDER HEADER WITH SEARCH')
 
 	return (
 		<header className={s.wrapper}>
@@ -41,7 +41,11 @@ const HeaderContainer: React.FC = () => {
 				{!isCartPage && (
 					<div className={s.searchContainer}>
 						<SearchSVG />
-						<input onChange={e => searchHandler(e)} type="text" placeholder="Поиск пиццы..." />
+						<input
+							onChange={e => searchHandler(e)}
+							type="text"
+							placeholder="Поиск пиццы..."
+						/>
 					</div>
 				)}
 				{!isCartPage && (

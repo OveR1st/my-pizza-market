@@ -7,7 +7,7 @@ import Sort from '../../components/Sort'
 
 import { useGetPizzaPageQuery } from '../../services/api'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { pizzaSlice } from '../../store/reducers/pizzaSlice.reducer'
+import { filterSlice } from '../../store/reducers/filterSlice.reducer'
 
 import s from './styles.module.scss'
 
@@ -16,10 +16,10 @@ const HomePage: React.FC = () => {
 
 	const dispatch = useAppDispatch()
 
-	const { setFilteredSort, setFilteredCategory } = pizzaSlice.actions
+	const { setFilteredSort, setFilteredCategory } = filterSlice.actions
 
 	const { activeCategory, sortBy, sortOrder, searchPizza } = useAppSelector(
-		state => state.pizzaReducer.filtered
+		state => state.filterReducer
 	)
 
 	const { data, error, isLoading } = useGetPizzaPageQuery({

@@ -2,10 +2,12 @@ import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/t
 import { pizzaApi } from '../services/api'
 import pizzaReducer from './reducers/pizzaSlice.reducer'
 import cartReducer from './reducers/cartSlice.reducer'
+import filterReducer from './reducers/filterSlice.reducer'
 
 const rootReducer = combineReducers({
 	pizzaReducer,
 	cartReducer,
+	filterReducer,
 	[pizzaApi.reducerPath]: pizzaApi.reducer,
 })
 
