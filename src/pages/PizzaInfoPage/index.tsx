@@ -30,7 +30,7 @@ const PizzaInfoPage: React.FC = () => {
 
 	// pizzaSlice
 
-	console.log('isLoading', isLoading)
+	// console.log('isLoading', isLoading)
 
 	return (
 		<div className={s.wrapper}>

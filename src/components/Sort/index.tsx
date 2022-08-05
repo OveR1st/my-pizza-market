@@ -3,6 +3,7 @@ import React from 'react'
 import { ReactComponent as SortSVG } from '../../assets/sortArrow.svg'
 
 import s from './styles.module.scss'
+import { useOpenedPopup } from '../../hooks/useOpenedPopup'
 
 interface IProps {
 	selectedSort: (sortBy: string, sortOrder: string) => void
@@ -12,7 +13,8 @@ interface IProps {
 
 const Sort: React.FC<IProps> = ({ selectedSort, sortBy, sortOrder }) => {
 	const [activeSortParam, setActiveSortParam] = React.useState(0)
-	const [isOpenPopup, setIsOpenPopup] = React.useState(false)
+
+	const sortModalRef = React.useRef(null)
 
 	const sortParamsArray = [
 		'популярности (DESC)',
@@ -63,8 +65,10 @@ const Sort: React.FC<IProps> = ({ selectedSort, sortBy, sortOrder }) => {
 		setIsOpenPopup(false)
 	}
 
+	const { isOpenPopup, setIsOpenPopup } = useOpenedPopup(sortModalRef.current)
+
 	return (
-		<div className={s.sort}>
+		<div ref={sortModalRef} className={s.sort}>
 			<SortSVG />
 			<b>Сортировка по:</b>
 			<span onClick={() => setIsOpenPopup(!isOpenPopup)}> {sortName}</span>
