@@ -42,7 +42,7 @@ const CartItem: React.FC<IProps> = React.memo(
 					</button>
 				</div>
 				<div className={s.cartItem__price}>
-					<b>{price} ₽</b>
+					<b>{price} грн</b>
 				</div>
 				<div className={s.cartItem__remove}>
 					<div onClick={() => pizzaDeleteCartHandler(id)} className={s.removeBtn}>

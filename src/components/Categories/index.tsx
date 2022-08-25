@@ -20,13 +20,16 @@ const Categories: React.FC<IProps> = ({ selectedCategory, activeCategory }) => {
 			<ul>
 				{category.map((cat, i) => {
 					return (
-						<li
-							key={i}
-							onClick={() => selectedCategoryHandler(cat, i)}
-							className={clsx(activeCategory === i && s.active)}
+						<button
+							disabled={i > 1 ? true : false}
+							onClick={() => {
+								selectedCategoryHandler(cat, i)
+							}}
 						>
-							{cat}
-						</li>
+							<li key={i} className={clsx(activeCategory === i && s.active)}>
+								{cat}
+							</li>
+						</button>
 					)
 				})}
 			</ul>

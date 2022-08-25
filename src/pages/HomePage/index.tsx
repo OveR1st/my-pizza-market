@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
 
 	const { data, error, isLoading } = useGetPizzaPageQuery({
 		page: currentPage,
-		limit: 4,
+		limit: currentPage === 3 ? 2 : 4,
 		activeCategory,
 		sortBy,
 		sortOrder,

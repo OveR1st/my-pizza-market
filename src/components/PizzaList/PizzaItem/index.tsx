@@ -97,7 +97,12 @@ const PizzaItem: React.FC<IProps> = ({ id, imageUrl, price, title, isLoading, si
 					)}
 				</div>
 				{isLoading ? (
-					<Skeleton height={'2.75rem'} width={'8.675625rem'} count={1} borderRadius={'30px'} />
+					<Skeleton
+						height={'2.75rem'}
+						width={'8.675625rem'}
+						count={1}
+						borderRadius={'30px'}
+					/>
 				) : (
 					<button onClick={pizzaAddHandler} className={s.addBtn}>
 						<AddSVG />

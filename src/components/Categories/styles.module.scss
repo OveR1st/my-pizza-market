@@ -3,18 +3,22 @@
 
 	ul {
 		display: flex;
-		li {
-			-webkit-touch-callout: none;
-			background-color: #f9f9f9;
-			border-radius: 30px;
-			cursor: pointer;
-			font-weight: 700;
-			margin-right: 10px;
-			padding: 13px 30px;
-			transition: background-color 0.1s ease-in-out;
-			-webkit-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
+		button {
+			border: none;
+			background: none;
+			li {
+				-webkit-touch-callout: none;
+				background-color: #f9f9f9;
+				border-radius: 30px;
+				cursor: pointer;
+				font-weight: 700;
+				margin-right: 10px;
+				padding: 13px 30px;
+				transition: background-color 0.1s ease-in-out;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
 		}
 
 		.active {
