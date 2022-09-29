@@ -9,7 +9,7 @@ describe('TEST APP', () => {
   test('renders App', () => {
     render(  
     <MemoryRouter>
-      <Provider store={store}>
+      <Provider>
         <App/>
       </Provider>
   </MemoryRouter>);
