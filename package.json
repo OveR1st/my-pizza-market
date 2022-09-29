@@ -74,6 +74,7 @@
     "@storybook/testing-library": "0.0.13",
     "@types/react-test-renderer": "^18.0.0",
     "babel-plugin-named-exports-order": "0.0.2",
+    "husky": "^8.0.1",
     "prop-types": "^15.8.1",
     "react-test-renderer": "^18.2.0",
     "webpack": "^5.74.0"
